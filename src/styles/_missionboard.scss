@@ -1,0 +1,228 @@
+@use "variables" as *;
+
+.mission-body{
+    position: relative;
+    background-color: transparent;
+}
+.mission-body::after{
+    z-index: -1;
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0px;
+    top: 0px;
+    background: linear-gradient(172.7deg, #FFD370 5.12%, #FFD370 53.33%, #FFD370 53.44%, #FFFFFF 53.45%, #FFFFFF 94.32%);
+}
+
+header{
+    display: flex;
+    justify-content: space-between;
+    padding: 24px 32px 0 32px;
+    margin: 0 0 40.55px 0;
+    
+    svg{
+        width: 242.51px;
+    }
+
+    div{
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        
+        h1{
+            font-size: 16px;
+            font-weight: 700;
+        }
+        h2{
+            font-size: 16px;
+            font-weight: 400;
+            cursor: pointer;
+        }
+    }
+}
+
+.mission{
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    gap: 16px;
+    .new-todo{
+        position: relative;
+        width: 500px;
+        height: 47px;
+        box-shadow: 0 0 15px 0 #00000026;
+        input{
+            border: none;
+            padding: 12px 16px;
+            border-radius: 10px;
+            width: 100%;
+            height: 100%;
+        }
+        div{
+            position: absolute;
+            top: 4px;
+            right:4px;
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: $theme-color-dark;
+        }
+
+    }
+    .toDoList-container{
+        width: 500px;
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        box-shadow: 0 0 15px 0 #00000026;
+        background-color: $theme-color-text-light-2;
+        border-radius: 10px;
+        ul{
+            list-style: none;            
+        }
+        .category{
+            position: relative;
+            width: 100%;
+            margin-bottom: 24px;
+            ul{
+                width: 100%;
+                display: flex;
+                justify-content: space-between;
+                li{
+                    color: $text-color-gray;
+                    width: (100% / 3);
+                    display: flex ;
+                    justify-content: center;
+                    align-items: center;
+                    height: 51px;
+                    border-bottom: 2px solid $line-color-gray; ;
+                    cursor: pointer;
+                }
+            }
+            .category-selected{
+                pointer-events: auto;
+                color: $theme-color-dark;
+                font-weight: 700;
+            }
+        }
+        .category::after{
+            pointer-events: none;
+            content: " ";
+            position: absolute;
+            width: (100% / 3);
+            height: 100%;
+            top: -2px;
+            background-color: transparent;
+            z-index: 10;
+            border-bottom: 2px solid $theme-color-dark;
+            transform: translateX($category-position);
+            transition: all 0.5s ease;
+        }
+        .list{
+            width: 100%;
+            padding: 0 48px 0 24px;
+            display: flex;
+            flex-direction: column;
+            .mission-card{
+                position: relative;
+                width: 100%;
+                display: flex;
+                align-items: start;
+                padding-bottom: 16px;
+                border-bottom: 1px solid $line-color-gray;
+                margin-bottom: 16px;
+                input{
+                    border: none;
+                    background-color: transparent;
+                    width: 100%;
+                    font-size: 14px;
+                }
+                .line-through{
+                    text-decoration: line-through;
+                    color: $text-color-gray;
+                }
+                .state-box{
+                    width: 20px;
+                    height: 20px;
+                    margin: 0 16px 0 0;
+                    > :nth-child(2){
+                        display: none;
+                    } 
+                }
+                .icon-delete{
+                    position: absolute;
+                    right: 0px;
+                }
+            }
+            .done{
+                .state-box{
+                    > :nth-child(1){
+                        display: none;
+                    }
+                    > :nth-child(2){
+                        display: block;
+                    }
+                }
+            }
+        }
+        .status-and-clearn{
+            padding: 0 24px 24px ;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            h2{
+                font-size: 14px;
+                font-weight: 400;
+            }
+            div{
+                border: none;
+                background-color: transparent;
+                color: $text-color-gray;
+            }
+        }
+    }
+    .container-no-mission{
+        margin-top: 60px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        width: 240px;
+        h3{
+            font-size: 16px;
+            font-weight: 400;
+        }
+        img{
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 768px){
+   header{
+        padding: 16px 24px;
+        h1{
+            display: none;
+        }
+   }
+   .mission-body::after{
+    display: none;
+    }
+    .mission-body{
+    background-color: $theme-color;
+    }
+   .mission{
+    padding: 0 24px;
+    .new-todo{
+        width: 100%;
+    }
+    .toDoList-container{
+        width: 100%;
+    }
+    }
+}

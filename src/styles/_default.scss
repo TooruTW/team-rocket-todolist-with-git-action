@@ -1,0 +1,12 @@
+@use "variables" as *;
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    a{
+        text-decoration: none;
+        color: inherit;
+    }
+    font-family: "Noto Sans TC", sans-serif;
+    color: $theme-color-dark;
+}
