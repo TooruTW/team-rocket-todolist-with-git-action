@@ -7,7 +7,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    steps:  
+    steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
@@ -15,6 +15,11 @@ jobs:
         uses: webfactory/ssh-agent@v0.5.3
         with:
           ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
 
       - name: Install dependencies
         run: |
@@ -26,10 +31,7 @@ jobs:
 
       - name: Upload dist to EC2
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          rsync -avz --delete -e "ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no" html ec2-user@${{ secrets.EC2_PUBLIC_IP }}:/usr/share/nginx/
+          rsync -avz --delete -e "ssh -o StrictHostKeyChecking=no" html ec2-user@${{ secrets.EC2_PUBLIC_IP }}:/usr/share/nginx/
 
       - name: Reload Nginx
-        run: ssh -i ~/.ssh/id_rsa -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} "sudo nginx -s reload"
+        run: ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} "sudo nginx -s reload"
