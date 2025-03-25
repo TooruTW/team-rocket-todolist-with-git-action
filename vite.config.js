@@ -7,7 +7,7 @@ export default defineConfig({
     rollupOptions: {
         input: {
             main: './index.html',
-            todolist: './src/todolist.html',
+            todolist: './src/toDoList.html',
           }      
     }
   }
