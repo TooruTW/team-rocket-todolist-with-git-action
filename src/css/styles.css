@@ -30,8 +30,9 @@ main .col {
   align-items: center;
   width: 37.5%;
 }
-main .col img {
+main .col .spline-container {
   width: 100%;
+  height: 350px;
 }
 main .col h2 {
   font-size: 24px;
